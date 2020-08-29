@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
+    public bool isExplored = false;
+    public Waypoint exploredFrom;
+
     Vector2Int gridPos;
+
     const int gridSize = 10;    //this is constant, so the value in which the cubes can move cant be changed anywhere
 
     public int GetGridSize()
