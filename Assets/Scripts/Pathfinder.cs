@@ -28,25 +28,40 @@ public class Pathfinder : MonoBehaviour
 
     public List<Waypoint> GetPath()
     {
+        if (path.Count == 0)    //if the path hasnt been made yet, do so - recreating a new path from every enemymovement is breaking all the set values on the blocks etc
+        {
+            CalculatePath();
+        }
+        return path;    //*go to 'EnemyMovement' where it is used in the 'Start'*
+    }
+
+    private void CalculatePath()
+    {
         LoadBlocks();   //creates the dictionary
-        ColourStartEnd();   //simply set the SerializedField waypoints to be green and red
         BreadthFirstSearch();   //finds the end waypoint and sets the 'exploredFrom' which is used in CreatePath
         CreatePath();   //using the exploredFrom variables, this will work it's way from end to start creating the 'path' list
-        return path;    //*go to 'EnemyMovement' where it is used in the 'Start'*
     }
 
     private void CreatePath()
     {
-        path.Add(endWayPoint);  //add the end to the list first
+        SetAsPath(endWayPoint);
+        
 
         Waypoint previous = endWayPoint.exploredFrom;   //creates a reference to the block that found the endWayPoint
         while(previous != startWayPoint)    //while we haven't reached the start yet
         {
-            path.Add(previous); //adds the previous block to the list
+            SetAsPath(previous);                                                                                                            //!!!!!!!!!!!!THIS IS WHERE THE ISSUE WAS, THE 2 LINES OF CODE WERE SWITCHED ON THEIRS
             previous = previous.exploredFrom;   //now the new previous becomes the olds previous' previous
         }
         path.Add(startWayPoint);    //once the list start has been found, I need to add this outside of the while loop
+        startWayPoint.isPlaceable = false;
         path.Reverse(); //this built-in function will reverse the list - before it began with the end value now it begins with the start value
+    }
+
+    private void SetAsPath(Waypoint waypoint)
+    {
+        path.Add(waypoint);  //add the end to the list first
+        waypoint.isPlaceable = false;
     }
 
     private void BreadthFirstSearch()
@@ -100,13 +115,6 @@ public class Pathfinder : MonoBehaviour
             neighbour.exploredFrom = searchCenter;
         }
     }   //*back to 'ExploreNeighbours'*
-
-
-    private void ColourStartEnd()
-    {
-        startWayPoint.SetTopColour(Color.green);
-        endWayPoint.SetTopColour(Color.red);
-    }   //*back to 'Start'*
 
 
     private void LoadBlocks()

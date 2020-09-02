@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,11 @@ public class Waypoint : MonoBehaviour
 {
     public bool isExplored = false;
     public Waypoint exploredFrom;
+
+    [SerializeField] Tower towerPrefab; //having type of Tower protect the game against assigning something that doesn't have the tower script (only the tower prefab has this)
+
+    public bool isPlaceable = true;
+    public bool towerPlaced = false;
 
     Vector2Int gridPos;
 
@@ -24,9 +30,25 @@ public class Waypoint : MonoBehaviour
         );
     }
 
-    public void SetTopColour(Color colour)
+    void OnMouseOver()
     {
-        MeshRenderer topMeshRendered = transform.Find("Top").GetComponent<MeshRenderer>();
-        topMeshRendered.material.color = colour;
+        if (Input.GetMouseButtonDown(0))    //left click
+        {
+            if (isPlaceable && !towerPlaced)    //if its a valid location && and there isn't a tower in that location already
+            {
+                print(gameObject.name + " tower placement");
+                PlaceTower();   //*to method*
+            }
+            else
+            {
+                print("Can't place tower here");
+            }
+        }
+    }
+
+    private void PlaceTower()
+    {
+        Instantiate(towerPrefab, transform.position, Quaternion.identity);  //instantiate a towerprefab in the waypoint object location
+        towerPlaced = true; //stops it from being placed again while occupied
     }
 }

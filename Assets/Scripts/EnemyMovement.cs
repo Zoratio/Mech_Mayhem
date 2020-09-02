@@ -17,12 +17,12 @@ public class EnemyMovement : MonoBehaviour
 
     IEnumerator FollowPath(List<Waypoint> path)
     {
-        print("Starting patrol...");
+        //print("Starting patrol...");
         foreach (Waypoint waypoint in path)
         {
             transform.position = waypoint.transform.position;
-            yield return new WaitForSeconds(1f);    //this will yield return back to just after the line 13 where it has started until 1 second where itll go back to executing this code again
+            yield return new WaitForSeconds(2f);    //this will yield return back to just after the line 13 where it has started until 1 second where itll go back to executing this code again
         }
-        print("Ending patrol");
+        //print("Ending patrol");
     }
 }
