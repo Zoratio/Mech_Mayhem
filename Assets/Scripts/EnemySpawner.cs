@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Range(0.1f, 120f)] [SerializeField] float spawnInterval = 15f;    
+    [Range(0.1f, 120f)] float spawnInterval = 2f;    
     [SerializeField] EnemyMovement enemy;   //having the type as enemymovement makes it so that anything that doesnt have this script attached to cannot be referenced in the inspector
 
     void Start() 
@@ -17,7 +17,11 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)    //forever
         {
-            Instantiate(enemy, transform.position, Quaternion.identity);
+            var attacker = Instantiate(enemy, transform.position, Quaternion.identity);
+
+            var parent = GameObject.Find("Enemies");    //setting hierarchy parent
+            attacker.transform.parent = parent.transform;   //setting hierarchy parent
+
             yield return new WaitForSeconds(spawnInterval);
         }
     }

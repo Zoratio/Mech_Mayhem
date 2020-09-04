@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+
+    [SerializeField] ParticleSystem selfDestructParticlePrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +24,20 @@ public class EnemyMovement : MonoBehaviour
         foreach (Waypoint waypoint in path)
         {
             transform.position = waypoint.transform.position;
-            yield return new WaitForSeconds(2f);    //this will yield return back to just after the line 13 where it has started until 1 second where itll go back to executing this code again
+            yield return new WaitForSeconds(1.5f);    //this will yield return back to just after the line 13 where it has started until 1 second where itll go back to executing this code again
         }
         //print("Ending patrol");
+        SelfDestruct();
+    }
+
+    public void SelfDestruct()
+    {
+        var vfx = Instantiate(selfDestructParticlePrefab, transform.position, Quaternion.identity);
+        vfx.Play();
+
+        var parent = GameObject.Find("Enemies");    //setting hierarchy parent
+        vfx.transform.parent = parent.transform;    //setting hierarchy parent
+
+        Destroy(gameObject);
     }
 }

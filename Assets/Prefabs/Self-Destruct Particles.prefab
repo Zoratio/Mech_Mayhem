@@ -14274,7 +14274,7 @@ GameObject:
   - component: {fileID: 198614261362037272}
   - component: {fileID: 199143583539381130}
   m_Layer: 0
-  m_Name: Blue Chunks
+  m_Name: Orange Chunks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14430,8 +14430,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 20
-      minScalar: 10
+      scalar: 40
+      minScalar: 20
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -14484,7 +14484,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.063635394, g: 0.18831289, b: 0.78676474, a: 1}
+      maxColor: {r: 1, g: 0.009412634, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -18971,8 +18971,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3a814b4e0cb3c4b7ba0d0fb88c3d3c93, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 4bde8e4c8ab7908478fc587951d3f6c5, type: 2}
+  - {fileID: 2100000, guid: 4bde8e4c8ab7908478fc587951d3f6c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19028,7 +19028,7 @@ GameObject:
   - component: {fileID: 198537984209914932}
   - component: {fileID: 199362987947312204}
   m_Layer: 0
-  m_Name: Enemy Death Particles
+  m_Name: Self-Destruct Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
