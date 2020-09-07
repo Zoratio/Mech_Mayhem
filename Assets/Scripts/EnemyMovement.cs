@@ -24,7 +24,7 @@ public class EnemyMovement : MonoBehaviour
         foreach (Waypoint waypoint in path)
         {
             transform.position = waypoint.transform.position;
-            yield return new WaitForSeconds(1.5f);    //this will yield return back to just after the line 13 where it has started until 1 second where itll go back to executing this code again
+            yield return new WaitForSeconds(0.4f);    //make this the same as the playerhealth yield
         }
         //print("Ending patrol");
         SelfDestruct();

@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class EnemyDamage : MonoBehaviour
 {
     //*IGNORE THE COLLISIONMESH HERE*
-    [SerializeField] int hitPoints = 10;
+    [SerializeField] int hitPoints = 30;
     [SerializeField] ParticleSystem hitParticlePrefab;
     [SerializeField] ParticleSystem deathParticlePrefab;
+    [SerializeField] AudioClip damageEnemySFX;
 
     Text score;
 
@@ -24,6 +25,10 @@ public class EnemyDamage : MonoBehaviour
         if (hitPoints < 1)
         {
             KillEnemy();
+        }
+        else
+        {
+            GetComponent<AudioSource>().PlayOneShot(damageEnemySFX);
         }
     }
 
