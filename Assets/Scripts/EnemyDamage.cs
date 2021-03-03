@@ -42,8 +42,8 @@ public class EnemyDamage : MonoBehaviour
         var vfx = Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
         vfx.Play();
 
-        var parent = GameObject.Find("Enemies");    //setting hierarchy parent
-        vfx.transform.parent = parent.transform;    //setting hierarchy parent
+        var parent = GameObject.Find("Enemies");    
+        vfx.transform.parent = parent.transform;    
 
         IncreaseScore();
         Destroy(gameObject);
